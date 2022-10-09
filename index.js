@@ -9,7 +9,7 @@ dotenv.config();
 //taking port and mongodb url from .env file
 
 const port = Number(process.env.PORT);
-const url  = process.env.MONGODB_URL;
+const MONGODB_URL  = process.env.MONGODB_URL;
 const app = express()
 app.use(
     cors({
@@ -20,7 +20,7 @@ app.use(
     })
   );
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded()) 
 
 
 
@@ -42,6 +42,7 @@ const User = new mongoose.model("userinfo", userSchema)
 app.get("/",(req,res)=>{
     res.send("connected");
 })
+
 app.post("/login", (req, res)=> {
 
     const { email, password} = req.body
@@ -95,7 +96,7 @@ app.post("/signup", async(req, res)=> {
 
 app.listen(port,async()=>{  
      
-    await mongoose.connect(`${url}`) 
+    await mongoose.connect(`${MONGODB_URL}`) 
     
      console.log("server started at port 8080")
 })
